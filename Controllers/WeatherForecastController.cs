@@ -3,8 +3,8 @@
 namespace requirementsSys.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+[Route("api/[controller]")]
+public class WeatherForecastController : Controller
 {
     private static readonly string[] Summaries = new[]
     {
