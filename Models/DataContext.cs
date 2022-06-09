@@ -11,4 +11,5 @@ public class DataContext: DbContext
     
   }
   public DbSet<Type> Types { get; set; }
+  public DbSet<Requirement> Requirements { get; set; }
 }
