@@ -27,4 +27,11 @@ public class TypeController: ControllerBase
     await _typeService.createType(newType);
     return CreatedAtAction(nameof(Get), new { id = newType.TypeID }, newType);
   }
+
+  [HttpDelete("{id}")]
+  public async Task<IActionResult> Delete(int id)
+  {
+    await _typeService.deleteType(id);
+    return Ok();
+  }
 }

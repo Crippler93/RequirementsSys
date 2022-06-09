@@ -23,4 +23,13 @@ public class TypeService
     await this._context.SaveChangesAsync();
     return;
   }
+
+  public async Task deleteType(int id)
+  {
+    Models.Type? type = await _context.Types.FirstOrDefaultAsync(types => types.TypeID == id);
+    if (type != null) {
+      this._context.Types.Remove(type);
+      await this._context.SaveChangesAsync();
+    }
+  }
 }

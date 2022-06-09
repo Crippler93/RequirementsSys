@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("ContextSQLite")));
 builder.Services.AddScoped<TypeService>();
+builder.Services.AddScoped<RequirementService>();
 
 var app = builder.Build();
 
