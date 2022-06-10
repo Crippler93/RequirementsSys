@@ -1,10 +1,12 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
 import { formTypeSubmitted, formTypeUpdated } from '../../data/type.actions';
+import { selectFeatureForm } from '../../data/type.selectors';
+import { TypeStorage } from '../../models/TypeState';
 
 @Component({
   selector: 'type-form',
@@ -20,14 +22,15 @@ export class FormComponent implements OnInit, OnDestroy {
     typeName: new FormControl('', [Validators.required]),
   });
 
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<TypeStorage>) {}
 
   ngOnInit(): void {
-    this.store.select('type').pipe(
+    this.store.pipe(
+      select(selectFeatureForm),
       take(1)
-    ).subscribe((({form}) => {
-      this.typeForm.patchValue(form.data);
-      this.isLoading = form.isLoading
+    ).subscribe((({data, loading}) => {
+      this.typeForm.patchValue(data);
+      this.isLoading = loading
     }))
 
     this.typeForm.valueChanges

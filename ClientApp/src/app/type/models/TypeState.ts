@@ -1,5 +1,9 @@
 import { Type } from './Type';
 
+export interface TypeStorage {
+  type: TypeState
+}
+
 export interface TypeState {
   list: ListState;
   form: FormState;

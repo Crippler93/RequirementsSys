@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Type } from '../../models/Type';
 import { getAllTypes } from '../../data/type.actions';
 import { DataItem } from '../../models/dataList';
-import { ListState, TypeState } from '../../models/TypeState';
+import { ListState, TypeStorage } from '../../models/TypeState';
+import { selectFeatureList } from '../../data/type.selectors';
 
 @Component({
   selector: 'app-type-list',
@@ -16,17 +17,17 @@ export class TypeListComponent implements OnInit, OnDestroy {
   public types: DataItem[] = [];
   public loading: boolean = false;
   private subject: Subject<any> = new Subject();
-  private type$: Observable<TypeState>;
+  private type$: Observable<ListState>;
 
-  constructor(private store: Store<any>) {
-    this.type$ = this.store.select('type');
+  constructor(private store: Store<TypeStorage>) {
+    this.type$ = this.store.pipe(select(selectFeatureList));
   }
 
   ngOnInit(): void {
     this.store.dispatch(getAllTypes());
-    this.type$.pipe(takeUntil(this.subject)).subscribe(({list}) => {
-      this.loading = list.loading;
-      this.types = list.data.map((type: Type) => ({ item: type.typeName }));
+    this.type$.pipe(takeUntil(this.subject)).subscribe(({loading, data}) => {
+      this.loading = loading;
+      this.types = data.map((type: Type) => ({ item: type.typeName }));
     });
   }
 

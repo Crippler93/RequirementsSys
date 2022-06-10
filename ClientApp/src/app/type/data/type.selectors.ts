@@ -1,9 +1,21 @@
 import { createSelector } from '@ngrx/store';
-import { ListState, TypeState } from '../models/TypeState';
+import { FormState, TypeState, TypeStorage } from '../models/TypeState';
 
-export const selectList = (state: any) => state.type;
+export const selectType = (state: any) => state.type;
 
 export const selectFeatureList = createSelector(
-  selectList,
+  selectType,
   (state: TypeState) => state.list
 );
+
+export const selectFeatureForm = createSelector(
+  selectType,
+  (state: TypeState) => state.form
+);
+
+const selectForm = (state: TypeStorage) => state.type.form;
+
+export const selectFormLoading = createSelector(
+  selectForm,
+  (state: FormState) => state.loading
+)
