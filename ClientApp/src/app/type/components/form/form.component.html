@@ -1,7 +1,7 @@
-<form class="col-md-6" [class.was-validated]="wasValidated">
+<form class="col-md-6" [class.was-validated]="wasValidated" [formGroup]="typeForm">
   <div class="mb-3">
     <label for="typeName" class="form-label">Name:</label>
-    <input type="text" class="form-control" required name="typeName" id="typeName">
+    <input type="text" class="form-control" required name="typeName" id="typeName" formControlName="typeName">
     <div class="invalid-feedback">
       Name is required
     </div>
@@ -9,5 +9,5 @@
       Looks good
     </div>
   </div>
-  <button class="btn btn-primary" type="submit" (click)="submitType($event)">Create type</button>
+  <button class="btn btn-primary" type="submit" [disabled]="isLoading" (click)="submitType($event)">Create type</button>
 </form>

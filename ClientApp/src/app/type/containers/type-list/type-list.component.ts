@@ -16,17 +16,17 @@ export class TypeListComponent implements OnInit, OnDestroy {
   public types: DataItem[] = [];
   public loading: boolean = false;
   private subject: Subject<any> = new Subject();
-  private type$: Observable<ListState>;
+  private type$: Observable<TypeState>;
 
-  constructor(private store: Store<TypeState>) {
-    this.type$ = this.store.select('types');
+  constructor(private store: Store<any>) {
+    this.type$ = this.store.select('type');
   }
 
   ngOnInit(): void {
     this.store.dispatch(getAllTypes());
-    this.type$.pipe(takeUntil(this.subject)).subscribe(({ loading, data }) => {
-      this.loading = loading;
-      this.types = data.map((type) => ({ item: type.typeName }));
+    this.type$.pipe(takeUntil(this.subject)).subscribe(({list}) => {
+      this.loading = list.loading;
+      this.types = list.data.map((type: Type) => ({ item: type.typeName }));
     });
   }
 

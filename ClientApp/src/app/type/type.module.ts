@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { TypeRoutingModule } from './type-routing.module';
 import { TypeComponent } from './type.component';
@@ -10,12 +11,13 @@ import { FormComponent } from './components/form/form.component';
 
 @NgModule({
   declarations: [
+
     TypeComponent,
     ListComponent,
     TypeListComponent,
     FormTypeComponent,
     FormComponent,
   ],
-  imports: [CommonModule, TypeRoutingModule],
+  imports: [CommonModule, TypeRoutingModule, ReactiveFormsModule],
 })
 export class TypeModule {}

@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { typeReducer } from './type/data/type.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { TypeEffect } from './type/data/type.effect';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [AppComponent, NavMenuComponent, HomeComponent],
@@ -26,7 +27,11 @@ import { TypeEffect } from './type/data/type.effect';
           import('./type/type.module').then((m) => m.TypeModule),
       },
     ]),
-    StoreModule.forRoot({ types: typeReducer }),
+    StoreModule.forRoot({ type: typeReducer}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+    }),
     EffectsModule.forRoot([TypeEffect]),
   ],
   providers: [],

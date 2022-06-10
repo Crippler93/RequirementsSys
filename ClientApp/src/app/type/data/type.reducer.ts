@@ -17,7 +17,7 @@ export const initialState: TypeState = {
     loading: false,
     data: {
       typeName: '',
-    },
+    }
   },
 };
 
@@ -53,6 +53,15 @@ export const typeReducer = createReducer(
       data: {
         typeName,
       },
+    },
+  })),
+  on(formTypeSubmitted, (state) => ({
+    ...state,
+    form: {
+      data: {
+        typeName: '',
+      },
+      loading: true,
     },
   }))
 );

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { catchError, mergeMap, map, exhaustMap } from 'rxjs/operators';
+
+import { Type } from '../models/Type';
 import { TypeService } from '../services/type.service';
 import {
   formTypeSubmitted,
@@ -30,8 +32,8 @@ export class TypeEffect {
   submitType$ = createEffect(() =>
     this.actions$.pipe(
       ofType(formTypeSubmitted.type),
-      exhaustMap((action) =>
-        this.typeService.createType(action).pipe(
+      exhaustMap((action: any) =>
+        this.typeService.createType(new Type(action.typeName)).pipe(
           map(() => ({
             type: formTypeSubmittedSuccess.type,
           })),
