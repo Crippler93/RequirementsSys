@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
+using requirementsSys.Models;
+
 [ApiController]
 [Route("api/[controller]")]
 public class RequirementController: ControllerBase
@@ -17,16 +19,20 @@ public class RequirementController: ControllerBase
   }
 
   [HttpPost]
-  public async Task<IActionResult> Post(Requirement newRequirement)
+  public async Task<IActionResult> Post(RequirementDTO newRequirement)
   {
-    await this._service.createRequirement(newRequirement);
-    return CreatedAtAction(nameof(Get), new { id = newRequirement.RequirementID }, newRequirement);
+    var requirement = await this._service.createRequirement(newRequirement);
+    if (requirement != null)
+    {
+      return CreatedAtAction(nameof(Get), new { id = requirement.RequirementID }, newRequirement);
+    }
+    return StatusCode(500);
   }
 
-  [HttpPut]
-  public async Task<IActionResult> Put(Requirement requirement)
+  [HttpPut("{id}")]
+  public async Task<IActionResult> Put(int id, RequirementDTO requirement)
   {
-    await this._service.updateRequirement(requirement);
+    await this._service.updateRequirement(requirement, id);
     return Ok();
   }
 }

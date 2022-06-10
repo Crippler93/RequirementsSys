@@ -12,19 +12,37 @@ public class RequirementService
     return await this._context.Requirements.Include(r => r.Type).ToListAsync();
   }
 
-  public async Task createRequirement(Requirement requirement)
+  public async Task<Requirement?> createRequirement(RequirementDTO requirement)
   {
     var type = await this._context.Types.FirstOrDefaultAsync(types => types.TypeID == requirement.TypeID);
-    if (type != null) {
-      requirement.Type = type;
+
+    if (type != null)
+    {
+      var newRequirement = new Requirement() { Title = requirement.Title, Description = requirement.Description, Type = type };
+      this._context.Requirements.Add(newRequirement);
+      await this._context.SaveChangesAsync();
+      return newRequirement;
     }
-    this._context.Requirements.Add(requirement);
-    await this._context.SaveChangesAsync();
+    return null;
   }
 
-  public async Task updateRequirement(Requirement requirement)
+  public async Task updateRequirement(RequirementDTO requirement, int id)
   {
-    this._context.Requirements.Update(requirement);
-    await this._context.SaveChangesAsync();
+    var foundedRequirement = await this._context.Requirements.FirstOrDefaultAsync(requirements => requirements.RequirementID == id);
+    var type = await this._context.Types.FirstOrDefaultAsync(types => types.TypeID == requirement.TypeID);
+    if (foundedRequirement != null)
+    {
+      foundedRequirement.Description = String.IsNullOrEmpty(requirement.Description) ? foundedRequirement.Description : requirement.Description;
+      foundedRequirement.Title = String.IsNullOrEmpty(requirement.Title) ? foundedRequirement.Title : requirement.Title;
+      foundedRequirement.Type = (type != null) ? type : foundedRequirement.Type;
+      this._context.Requirements.Update(foundedRequirement);
+      await this._context.SaveChangesAsync();
+
+    }
+  }
+
+  public async Task<Requirement?> getRequirementByID(int id)
+  {
+    return await this._context.Requirements.FirstOrDefaultAsync(requirements => requirements.RequirementID == id);
   }
 }
