@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import {Type} from './models/Type'
+import { Type } from '../models/Type';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TypeService {
-
-  private _baseURL: string = "";
+  private _baseURL: string = '';
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this._baseURL = baseUrl;
