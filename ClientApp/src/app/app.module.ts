@@ -26,6 +26,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
         loadChildren: () =>
           import('./type/type.module').then((m) => m.TypeModule),
       },
+      { path: 'requirement', loadChildren: () => import('./requirements/requirements.module').then(m => m.RequirementsModule) },
     ]),
     StoreModule.forRoot({ type: typeReducer}),
     StoreDevtoolsModule.instrument({
