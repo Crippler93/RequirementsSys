@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Type } from '../models/Type';
 import { TypeService } from '../type.service';
+import { getAllTypes } from '../actions/type.actions';
 
 @Component({
   selector: 'app-type-list',
@@ -12,12 +14,23 @@ import { TypeService } from '../type.service';
 export class TypeListComponent implements OnInit, OnDestroy {
 
   public types: Type[] = [];
+  public loading: boolean = false;
   private subject: Subject<any> = new Subject();
+  private type$: Observable<{loading: boolean, data: Type[]}>;
 
-  constructor(private typeService: TypeService) { }
+  constructor(private typeService: TypeService, private store: Store<{ types: {loading: boolean, data: Type[]} }>) {
+    this.type$ = this.store.select('types');
+  }
 
   ngOnInit(): void {
-    this.getAllTypes();
+    // this.getAllTypes();
+    this.store.dispatch(getAllTypes());
+    this.type$.pipe(
+      takeUntil(this.subject)
+    ).subscribe(({loading, data}) => {
+      this.loading = loading;
+      this.types = data;
+    });
   }
 
   ngOnDestroy(): void {
@@ -25,14 +38,14 @@ export class TypeListComponent implements OnInit, OnDestroy {
     this.subject.complete();
   }
 
-  getAllTypes(): void {
-    this.typeService.getTypes()
-      .pipe(
-        takeUntil(this.subject)
-      )
-      .subscribe(types => {
-      this.types = types;
-    })
-  }
+  // getAllTypes(): void {
+  //   this.typeService.getTypes()
+  //     .pipe(
+  //       takeUntil(this.subject)
+  //     )
+  //     .subscribe(types => {
+  //     this.types = types;
+  //   })
+  // }
 
 }
