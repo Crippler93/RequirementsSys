@@ -1,1 +1,17 @@
-<p>requirements works!</p>
+<section id="container">
+  <aside>
+      <ul class="list-group">
+        <a class="list-group-item list-group-item-action" routerLinkActive="active" aria-current="true" [routerLink]="['create']">
+          Create
+        </a>
+        <a class="list-group-item list-group-item-action" routerLinkActive="active" aria-current="true" [routerLink]="['list']">
+          List
+        </a>
+      </ul>
+  </aside>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</section>
+
