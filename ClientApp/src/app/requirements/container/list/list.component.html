@@ -1,1 +1,14 @@
-<p>list works!</p>
+<div class="d-flex justify-content-center" *ngIf="loading">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<ul *ngIf="!loading">
+  <li *ngFor="let requirement of requirements">
+    <p>
+      <b>{{requirement.title}}: </b> {{requirement.description}} <br>
+      <small>Type: {{requirement.type.typeName}}</small>
+    </p>
+  </li>
+</ul>
