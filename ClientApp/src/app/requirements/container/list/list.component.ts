@@ -8,6 +8,7 @@ import {
   RequirementStorage,
 } from '../../state/requirements.state';
 import { getAllRequirements } from '../../state/requirement.actions';
+import { selectRequirement } from '../../state/requirement.selectors';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -21,7 +22,7 @@ export class ListComponent implements OnInit {
   requirements$: Observable<RequirementState>;
 
   constructor(private store: Store<RequirementStorage>) {
-    this.requirements$ = this.store.select('requirement');
+    this.requirements$ = this.store.select(selectRequirement);
   }
 
   ngOnInit(): void {

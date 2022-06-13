@@ -6,8 +6,10 @@ import { RequirementsComponent } from './requirements.component';
 
 const routes: Routes = [
   { path: '', component: RequirementsComponent, children: [
+    {path: '', redirectTo: 'list'},
     {path: 'list', component: ListComponent},
-    {path: 'create', component: CreateComponent}
+    {path: 'create', component: CreateComponent},
+    {path: '**', redirectTo: 'list' },
   ]}
 ];
 
