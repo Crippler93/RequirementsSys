@@ -4,7 +4,7 @@ import { DataItem } from '../../models/dataList';
 @Component({
   selector: 'type-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css'],
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
   @Input() dataList: DataItem[] = [];

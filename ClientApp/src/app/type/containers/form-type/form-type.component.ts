@@ -9,7 +9,7 @@ import { selectFormLoading } from '../../state/type.selectors';
 @Component({
   selector: 'type-form-container',
   templateUrl: './form-type.component.html',
-  styleUrls: ['./form-type.component.css'],
+  styleUrls: ['./form-type.component.scss'],
 })
 export class FormTypeComponent implements OnInit {
   private form$: Observable<boolean>;
