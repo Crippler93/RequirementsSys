@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Type } from '../../models/Type';
-import { getAllTypes } from '../../data/type.actions';
+import { getAllTypes } from '../../state/type.actions';
 import { DataItem } from '../../models/dataList';
-import { ListState, TypeStorage } from '../../models/TypeState';
-import { selectFeatureList } from '../../data/type.selectors';
+import { ListState, TypeStorage } from '../../models/TypeStorage';
+import { selectFeatureList } from '../../state/type.selectors';
 
 @Component({
   selector: 'app-type-list',
@@ -20,7 +20,7 @@ export class TypeListComponent implements OnInit, OnDestroy {
   private type$: Observable<ListState>;
 
   constructor(private store: Store<TypeStorage>) {
-    this.type$ = this.store.pipe(select(selectFeatureList));
+    this.type$ = this.store.select(selectFeatureList);
   }
 
   ngOnInit(): void {

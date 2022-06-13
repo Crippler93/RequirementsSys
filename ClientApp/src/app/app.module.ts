@@ -8,9 +8,9 @@ import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { typeReducer } from './type/data/type.reducer';
+import { typeReducer } from './type/state/type.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { TypeEffect } from './type/data/type.effect';
+import { TypeEffect } from './type/state/type.effect';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({

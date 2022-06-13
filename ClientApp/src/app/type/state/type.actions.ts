@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Type } from '../models/Type';
-import { TypeForm } from '../models/TypeState';
+import { TypeForm } from '../models/TypeStorage';
 
 export const getAllTypes = createAction('[TypeList Component] Get All');
 export const getAllTypesSuccess = createAction(

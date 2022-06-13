@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { TypeForm } from '../../models/TypeState';
-import { selectFormLoading } from '../../data/type.selectors';
+import { TypeForm } from '../../models/TypeStorage';
+import { selectFormLoading } from '../../state/type.selectors';
 
 @Component({
   selector: 'type-form-container',
@@ -18,9 +18,7 @@ export class FormTypeComponent implements OnInit {
   public isLoading: boolean = false;
 
   constructor(private store: Store<any>) {
-    this.form$ = this.store.pipe(
-      select(selectFormLoading)
-    )
+    this.form$ = this.store.select(selectFormLoading)
   }
 
   ngOnInit() {

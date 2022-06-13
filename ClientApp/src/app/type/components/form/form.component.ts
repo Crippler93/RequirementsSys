@@ -4,9 +4,9 @@ import { select, Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
-import { formTypeSubmitted, formTypeUpdated } from '../../data/type.actions';
-import { selectFeatureForm } from '../../data/type.selectors';
-import { TypeStorage } from '../../models/TypeState';
+import { formTypeSubmitted, formTypeUpdated } from '../../state/type.actions';
+import { selectFeatureForm } from '../../state/type.selectors';
+import { TypeStorage } from '../../models/TypeStorage';
 
 @Component({
   selector: 'type-form',
@@ -25,8 +25,7 @@ export class FormComponent implements OnInit, OnDestroy {
   constructor(private store: Store<TypeStorage>) {}
 
   ngOnInit(): void {
-    this.store.pipe(
-      select(selectFeatureForm),
+    this.store.select(selectFeatureForm).pipe(
       take(1)
     ).subscribe((({data, loading}) => {
       this.typeForm.patchValue(data);

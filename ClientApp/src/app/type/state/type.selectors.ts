@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { FormState, TypeState, TypeStorage } from '../models/TypeState';
+import { FormState, TypeState, TypeStorage } from '../models/TypeStorage';
 
 export const selectType = (state: any) => state.type;
 

@@ -6,7 +6,7 @@ import {
   formTypeUpdated,
   formTypeSubmittedSuccess,
 } from './type.actions';
-import { TypeState } from '../models/TypeState';
+import { TypeState } from '../models/TypeStorage';
 
 export const initialState: TypeState = {
   list: {
