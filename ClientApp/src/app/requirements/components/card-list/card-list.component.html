@@ -1,0 +1,9 @@
+<section id="list">
+  <div *ngFor="let requirement of requirements" class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{requirement.title}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{requirement?.type?.typeName}}</h6>
+      <p class="card-text">{{requirement.description}}</p>
+    </div>
+  </div>
+</section>

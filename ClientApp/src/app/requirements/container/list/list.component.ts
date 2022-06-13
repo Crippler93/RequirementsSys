@@ -40,6 +40,10 @@ export class ListComponent implements OnInit, OnDestroy {
     });
   }
 
+  addRequirement(): void {
+    this.requirements = [...this.requirements, {description: '', requirementID: 0, title: '', type: {typeID: 0, typeName: ''}}]
+  }
+
   ngOnDestroy(): void {
     this.subject.next();
     this.subject.complete();

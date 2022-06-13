@@ -9,9 +9,10 @@ import { ListComponent } from './container/list/list.component';
 import { CreateComponent } from './container/create/create.component';
 import { requirementReducer } from './state/requirment.reducer';
 import { RequirementEffects } from './state/requirement.efffects';
+import { CardListComponent } from './components/card-list/card-list.component';
 
 @NgModule({
-  declarations: [RequirementsComponent, ListComponent, CreateComponent],
+  declarations: [RequirementsComponent, ListComponent, CreateComponent, CardListComponent],
   imports: [
     CommonModule,
     RequirementsRoutingModule,

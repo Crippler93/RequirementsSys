@@ -1,7 +1,7 @@
 section#container {
   display: grid;
-  grid-template-areas: 'menu view';
-  grid-template-columns: 200px 1fr;
+  grid-template-areas: 'menu' 'view';
+  grid-template-columns: 1fr;
   grid-template-rows: 1fr;
 }
 
@@ -11,4 +11,12 @@ aside {
 
 main {
   grid-area: view;
+}
+
+@media screen and (min-width: var(--bp-sm)) {
+  section#container {
+    display: grid;
+    grid-template-areas: 'menu view';
+    grid-template-columns: 200px 1fr;
+  }
 }
