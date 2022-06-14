@@ -1,7 +1,53 @@
+@import "../../../../styles/variables";
+
 section#list {
   width: 100%;
+  display: inline-flex;
+  flex-wrap: wrap;
 }
 
 section#list .card {
   width: 100%;
+  margin-bottom: 5px;
+}
+
+@media screen and (min-width: $bp-sm) {
+  section#list {
+    gap: 5px;
+  }
+  section#list .card {
+    width: calc(270px - 0.75rem - 2.5px);
+  }
+}
+
+@media screen and (min-width: $bp-md) {
+  section#list {
+    gap: 0;
+  }
+
+  section#list .card {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: $bp-lg) {
+  section#list {
+    gap: 5px;
+  }
+
+  section#list .card {
+    width: calc(380px - 0.75rem - 7.5px);
+  }
+}
+
+@media screen and (min-width: $bp-xl) {
+  section#list .card {
+    width: calc(470px - 0.75rem - 7.5px);
+  }
+}
+
+@media screen and (min-width: $bp-xxl) {
+  section#list .card {
+    width: calc(373px - 0.5rem - 6.4px);
+  }
 }
