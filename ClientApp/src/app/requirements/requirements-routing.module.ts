@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', component: RequirementsComponent, children: [
     {path: '', redirectTo: 'list'},
     {path: 'list', component: ListComponent},
-    {path: 'create', component: CreateComponent},
+    {path: 'new', component: CreateComponent},
     {path: '**', redirectTo: 'list' },
   ]}
 ];

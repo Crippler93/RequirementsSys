@@ -5,9 +5,12 @@ import { TypeListComponent } from './containers/type-list/type-list.component';
 import { TypeComponent } from './type.component';
 
 const routes: Routes = [
-  { path: '', component: TypeComponent },
-  { path: 'list', component: TypeListComponent },
-  { path: 'new', component: FormTypeComponent },
+  { path: '', component: TypeComponent, children: [
+    { path: '', redirectTo: 'list'},
+    { path: 'list', component: TypeListComponent },
+    { path: 'new', component: FormTypeComponent },
+    { path: '**', redirectTo: 'list'}
+  ]},
 ];
 
 @NgModule({

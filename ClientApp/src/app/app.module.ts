@@ -12,6 +12,7 @@ import { TypeEffect } from './type/state/type.effect';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app.routing.module';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent, NavMenuComponent],
@@ -27,6 +28,7 @@ import { RouterModule } from '@angular/router';
       autoPause: true,
     }),
     EffectsModule.forRoot([TypeEffect]),
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

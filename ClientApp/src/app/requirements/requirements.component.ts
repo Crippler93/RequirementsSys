@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Link } from '../types/Link';
 
 @Component({
   selector: 'app-requirements',
@@ -6,20 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./requirements.component.scss']
 })
 export class RequirementsComponent implements OnInit {
-
-  selectedMenu: string = "";
+  links: Link[] = [{ route: ['list'], name: 'List' }, { route: ['new'], name: 'Create' }]
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  isActive(menuName: string): boolean {
-    return this.selectedMenu === menuName;
-  }
-
-  selectMenu(name: string): void {
-    this.selectedMenu = name;
   }
 
 }

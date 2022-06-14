@@ -8,16 +8,16 @@ import { ListComponent } from './components/list/list.component';
 import { TypeListComponent } from './containers/type-list/type-list.component';
 import { FormTypeComponent } from './containers/form-type/form-type.component';
 import { FormComponent } from './components/form/form.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-
     TypeComponent,
     ListComponent,
     TypeListComponent,
     FormTypeComponent,
     FormComponent,
   ],
-  imports: [CommonModule, TypeRoutingModule, ReactiveFormsModule],
+  imports: [CommonModule, TypeRoutingModule, ReactiveFormsModule, SharedModule],
 })
 export class TypeModule {}

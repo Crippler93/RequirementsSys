@@ -12,6 +12,7 @@ import { RequirementEffects } from './state/requirement.efffects';
 import { CardListComponent } from './components/card-list/card-list.component';
 import { FormComponent } from './components/form/form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [RequirementsComponent, ListComponent, CreateComponent, CardListComponent, FormComponent],
@@ -21,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     StoreModule.forFeature('requirement', requirementReducer),
     EffectsModule.forFeature([RequirementEffects]),
+    SharedModule,
   ],
 })
 export class RequirementsModule {}
