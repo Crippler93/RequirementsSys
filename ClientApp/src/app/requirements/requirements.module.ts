@@ -10,12 +10,15 @@ import { CreateComponent } from './container/create/create.component';
 import { requirementReducer } from './state/requirment.reducer';
 import { RequirementEffects } from './state/requirement.efffects';
 import { CardListComponent } from './components/card-list/card-list.component';
+import { FormComponent } from './components/form/form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [RequirementsComponent, ListComponent, CreateComponent, CardListComponent],
+  declarations: [RequirementsComponent, ListComponent, CreateComponent, CardListComponent, FormComponent],
   imports: [
     CommonModule,
     RequirementsRoutingModule,
+    ReactiveFormsModule,
     StoreModule.forFeature('requirement', requirementReducer),
     EffectsModule.forFeature([RequirementEffects]),
   ],

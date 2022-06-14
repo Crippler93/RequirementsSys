@@ -1,0 +1,17 @@
+<form [formGroup]="requirementForm" (ngSubmit)="submit()">
+  <div class="mb-3">
+    <label for="" class="form-label">Title:</label>
+    <input type="text" class="form-control" name="" id="" formControlName="title">
+  </div>
+  <div class="mb-3">
+    <label for="" class="form-label">Description:</label>
+    <textarea class="form-control" name="" id="" formControlName="description" ></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="" class="form-label">Type:</label>
+    <select class="form-control" name="" id="" formControlName="typeID">
+    <option *ngFor="let type of types" [value]="type.typeID">{{type.typeName}}</option>
+    </select>
+  </div>
+  <button class="btn btn-primary" type="submit">Create type</button>
+</form>

@@ -18,7 +18,11 @@ export interface RequirementState {
     loading: boolean;
     error: string;
   };
-  form: RequirementForm;
+  form: {
+    values: RequirementForm;
+    loading: boolean;
+    error: string;
+  };
 }
 
 export interface RequirementForm {
@@ -29,9 +33,13 @@ export interface RequirementForm {
 
 export const initialState: RequirementState = {
   form: {
-    description: '',
-    title: '',
-    typeID: '',
+    values: {
+      description: '',
+      title: '',
+      typeID: '',
+    },
+    error: '',
+    loading: false
   },
   requirements: {
     data: [],

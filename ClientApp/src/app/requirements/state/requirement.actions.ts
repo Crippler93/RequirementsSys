@@ -7,6 +7,9 @@ export enum requirementsActions {
   GET_ALL_REQUIREMENTS_ERROR = 'REQUIREMENTS GET_ALL_REQUIREMENTS_ERROR',
   REQUIREMENT_FORM_UPDATE = 'REQUIREMENT_FORM_UPDATE',
   REQUIREMENT_FORM_CLEAN = 'REQUIREMENT_FORM_CLEAN',
+  REQUIREMENT_FORM_SUBMIT = 'REQUIREMENT_FORM_SUBMITTED',
+  REQUIREMENT_FORM_SUCCESS = 'REQUIREMENT_FORM_SUCCESS',
+  REQUIREMENT_FORM_FAILURE = 'REQUIREMENT_FORM_FAILURE',
 }
 
 export const getAllRequirements = createAction(
@@ -21,11 +24,21 @@ export const getAllRequirementsError = createAction(
   props<{ payload: string }>()
 );
 
+export const requirementFormSubmit = createAction(
+  requirementsActions.REQUIREMENT_FORM_SUBMIT,
+  props<{ payload: RequirementForm}>()
+)
+export const requirementFormSubmitSuccess = createAction(
+  requirementsActions.REQUIREMENT_FORM_SUCCESS
+)
+export const requirementFormSubmitFailure = createAction(
+  requirementsActions.REQUIREMENT_FORM_FAILURE,
+  props<{payload: string}>()
+)
 export const updateRequirementForm = createAction(
   requirementsActions.REQUIREMENT_FORM_UPDATE,
   props<{ payload: RequirementForm }>()
 );
-
 export const cleanRequirementForm = createAction(
   requirementsActions.REQUIREMENT_FORM_CLEAN
 );
