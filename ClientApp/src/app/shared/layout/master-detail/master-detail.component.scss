@@ -5,6 +5,7 @@ section#container {
   grid-template-areas: "menu" "view";
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
+  gap: 10px;
 }
 
 aside {
@@ -15,11 +16,29 @@ main {
   grid-area: view;
 }
 
+aside {
+  .btn-group {
+    display: block;
+  }
+  .list-group {
+    display: none;
+  }
+}
+
 @media screen and (min-width: $bp-md) {
   section#container {
     display: grid;
     grid-template-areas: "menu view";
     grid-template-columns: 200px 1fr;
-    gap: 10px;
+    gap: 20px;
+  }
+
+  aside {
+    .btn-group {
+      display: none;
+    }
+    .list-group {
+      display: block;
+    }
   }
 }

@@ -40,11 +40,7 @@ section#list .card {
   }
 }
 
-@media screen and (min-width: $bp-xl) {
-  section#list .card {
-    width: calc(470px - 0.75rem - 7.5px);
-  }
-}
+
 
 @media screen and (min-width: $bp-xxl) {
   section#list .card {

@@ -5,6 +5,12 @@
           {{link.name}}
         </a>
       </ul>
+
+      <div class="btn-group" role="group" aria-label="Button navigation">
+        <a *ngFor="let link of links" class="btn btn-outline-primary" routerLinkActive="active" [routerLink]="link.route">
+          {{link.name}}
+        </a>
+      </div>
   </aside>
 
   <main>
