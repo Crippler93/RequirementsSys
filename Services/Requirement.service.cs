@@ -45,4 +45,19 @@ public class RequirementService
   {
     return await this._context.Requirements.FirstOrDefaultAsync(requirements => requirements.RequirementID == id);
   }
+
+  private async Task<List<Requirement>> GetRequirementsByTypeID(int typeId)
+  {
+    return await this._context.Requirements.Include(req => req.Type).Where(req => req.Type.TypeID == typeId).ToListAsync();
+  }
+
+  public async Task RemoveTypeIDFromRequirements(int typeId)
+  {
+    var requirements = await this.GetRequirementsByTypeID(typeId);
+    foreach (var requirement in requirements)
+    {
+      requirement.Type = null;
+    }
+    await this._context.SaveChangesAsync();
+  }
 }

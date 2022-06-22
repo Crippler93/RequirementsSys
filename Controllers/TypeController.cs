@@ -9,10 +9,12 @@ namespace requirementsSys.Controllers;
 public class TypeController: ControllerBase
 {
   private TypeService _typeService { get; set; }
+  private RequirementService _requirementService { get; set; }
 
-  public TypeController(TypeService typeService)
+  public TypeController(TypeService typeService, RequirementService requirementService)
   {
     _typeService = typeService;
+    _requirementService = requirementService;
   }
 
   [HttpGet]
@@ -31,6 +33,7 @@ public class TypeController: ControllerBase
   [HttpDelete("{id}")]
   public async Task<IActionResult> Delete(int id)
   {
+    await _requirementService.RemoveTypeIDFromRequirements(id);
     await _typeService.deleteType(id);
     return Ok();
   }
