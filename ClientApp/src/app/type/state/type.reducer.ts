@@ -5,6 +5,9 @@ import {
   formTypeSubmitted,
   formTypeUpdated,
   formTypeSubmittedSuccess,
+  deleteType,
+  deleteTypeSuccess,
+  deleteTypeFailure,
 } from './type.actions';
 import { TypeState } from '../models/TypeStorage';
 
@@ -63,5 +66,26 @@ export const typeReducer = createReducer(
       },
       loading: true,
     },
+  })),
+  on(deleteType, (state) => ({
+    ...state,
+    list: {
+      ...state.list,
+      loading: true
+    }
+  })),
+  on(deleteTypeSuccess, (state) => ({
+    ...state,
+    list: {
+      ...state.list,
+      loading: false
+    }
+  })),
+  on(deleteTypeFailure, (state) => ({
+    ...state,
+    list: {
+      ...state.list,
+      loading: false
+    }
   }))
 );

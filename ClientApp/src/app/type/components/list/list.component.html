@@ -10,7 +10,7 @@
     <tr *ngFor="let type of dataList;let i = index;">
       <th scope="row">{{i}}</th>
       <td>{{type.item}}</td>
-      <td><button class="btn btn-link">Edit</button><button class="btn btn-link text-danger">Delete</button></td>
+      <td><button class="btn btn-link">Edit</button><button class="btn btn-link text-danger" (click)="deleteType(type.id)">Delete</button></td>
     </tr>
   </tbody>
 </table>

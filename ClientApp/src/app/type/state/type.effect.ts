@@ -1,29 +1,28 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { catchError, mergeMap, map, exhaustMap } from 'rxjs/operators';
 
 import { Type } from '../models/Type';
 import { TypeService } from '../services/type.service';
 import {
-  formTypeSubmitted,
-  formTypeSubmittedSuccess,
-  getAllTypes,
-  getAllTypesSuccess,
+  typesActions
 } from './type.actions';
 
 @Injectable()
 export class TypeEffect {
   loadTypes$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(getAllTypes.type),
+      ofType(typesActions.GET_TYPES),
       mergeMap(() =>
         this.typeService.getTypes().pipe(
           map((types) => ({
-            type: getAllTypesSuccess.type,
+            type: typesActions.GET_TYPES_SUCCESS,
             payload: types,
           })),
-          catchError(() => EMPTY)
+          catchError(() => of({
+            type: typesActions.GET_TYPES_FAILURE,
+          }))
         )
       )
     )
@@ -31,17 +30,33 @@ export class TypeEffect {
 
   submitType$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(formTypeSubmitted.type),
+      ofType(typesActions.FORM_SUBMITTED),
       exhaustMap((action: any) =>
         this.typeService.createType(new Type(action.typeName)).pipe(
           map(() => ({
-            type: formTypeSubmittedSuccess.type,
+            type: typesActions.FORM_SUBMITTED_SUCCESS,
           })),
           catchError(() => EMPTY)
         )
       )
     )
   );
+
+  deleteType$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(typesActions.DELETE_TYPE),
+      mergeMap(({payload}) =>
+        this.typeService.deleteType(payload).pipe(
+          map(() => ({
+            type: typesActions.DELETE_TYPE_SUCCESS,
+          })),
+          catchError(() => of({
+            type: typesActions.DELETE_TYPE_FAILURE
+          }))
+        )
+      )
+    )
+  )
 
   constructor(private actions$: Actions, private typeService: TypeService) {}
 }

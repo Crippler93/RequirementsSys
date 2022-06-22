@@ -27,7 +27,7 @@ export class TypeListComponent implements OnInit, OnDestroy {
     this.store.dispatch(getAllTypes());
     this.type$.pipe(takeUntil(this.subject)).subscribe(({loading, data}) => {
       this.loading = loading;
-      this.types = data.map((type: Type) => ({ item: type.typeName }));
+      this.types = data.map((type: Type) => ({ item: type.typeName, id: type.typeID ?? 0 }));
     });
   }
 

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { DataItem } from '../../models/dataList';
+import { deleteType } from '../../state/type.actions';
 
 @Component({
   selector: 'type-list',
@@ -8,7 +10,12 @@ import { DataItem } from '../../models/dataList';
 })
 export class ListComponent implements OnInit {
   @Input() dataList: DataItem[] = [];
-  constructor() {}
+
+  constructor(private store: Store) {}
 
   ngOnInit(): void {}
+
+  deleteType(id: any): void {
+    this.store.dispatch(deleteType({payload: id}));
+  }
 }

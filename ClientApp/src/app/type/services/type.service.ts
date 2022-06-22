@@ -21,4 +21,8 @@ export class TypeService {
   public getTypes(): Observable<Type[]> {
     return this.http.get<Type[]>(`${this._baseURL}api/type`);
   }
+
+  public deleteType(id: number): Observable<any> {
+    return this.http.delete<any>(`${this._baseURL}api/type/${id}`)
+  }
 }
