@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
-import { catchError, mergeMap, map, exhaustMap } from 'rxjs/operators';
+import { catchError, mergeMap, map, exhaustMap, switchMap, tap } from 'rxjs/operators';
 
 import { Type } from '../models/Type';
 import { TypeService } from '../services/type.service';
@@ -36,6 +37,7 @@ export class TypeEffect {
           map(() => ({
             type: typesActions.FORM_SUBMITTED_SUCCESS,
           })),
+          tap(() => this.router.navigate(['/type/list'])),
           catchError(() => EMPTY)
         )
       )
@@ -47,9 +49,14 @@ export class TypeEffect {
       ofType(typesActions.DELETE_TYPE),
       mergeMap(({payload}) =>
         this.typeService.deleteType(payload).pipe(
-          map(() => ({
-            type: typesActions.DELETE_TYPE_SUCCESS,
-          })),
+          switchMap(() => [
+            {
+              type: typesActions.DELETE_TYPE_SUCCESS,
+            },
+            {
+              type: typesActions.GET_TYPES,
+            }
+          ]),
           catchError(() => of({
             type: typesActions.DELETE_TYPE_FAILURE
           }))
@@ -58,5 +65,5 @@ export class TypeEffect {
     )
   )
 
-  constructor(private actions$: Actions, private typeService: TypeService) {}
+  constructor(private actions$: Actions, private typeService: TypeService, private router: Router) {}
 }
